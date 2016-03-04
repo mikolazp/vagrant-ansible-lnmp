@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  #become: true
+  become: true
   vars_files:
     - vars/all.yml
   roles:
@@ -9,5 +9,6 @@
     - nginx
     - mysql
     - php
+    - phpmyadmin
     - composer
     - app

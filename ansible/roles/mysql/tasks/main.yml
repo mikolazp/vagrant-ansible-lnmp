@@ -36,3 +36,11 @@
 - name: mysql | Create users
   mysql_user: name={{ mysql.user }} password={{ mysql.password }} priv={{ mysql.database }}.*:ALL state=present login_user=root login_password={{ mysql.root_password }}
   when: mysql.user is defined
+
+- name: copy .my.cnf for cur user
+  become: false
+  template: src=my.cnf.j2 dest="~/.my.cnf"
+
+- name: copy .my.cnf for root
+  become: true
+  template: src=my.cnf.j2 dest="/root/.my.cnf"
