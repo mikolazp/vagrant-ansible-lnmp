@@ -1,0 +1,9 @@
+- name: Install Composer
+  become: true
+  shell: curl -s https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
+
+- name: Install plugin for yii2 assets
+  shell: composer global require "fxp/composer-asset-plugin:~1.1.1"
+
+
+

@@ -1,0 +1,33 @@
+---
+server:
+    install: '1'
+    packages: [git, mc, htop]
+    timezone: UTC
+    locale: ru_RU.UTF-8
+vagrant_local:
+    install: '1'
+    vm: {
+            base_box: trusty64,
+            hostname: devmain,
+            ip: 192.168.10.11,
+            memory: '512',
+            sharedfolder: ./,
+            useVagrantCloud: '1',
+            syncType: nfs
+        }
+nginx:
+    install: '1'
+    docroot: /home/vagrant/Code/bunker.dev
+    servername: bunker.dev
+mysql:
+    install: '1'
+    root_password: qwe012
+#    database: test
+#    user: test
+#    password: test
+#    dump: ''
+php:
+    install: '1'
+    ppa: php5-5.6
+    packages: [php5-cli, php5-intl, php5-mcrypt, php5-mysql, php5-curl]
+
