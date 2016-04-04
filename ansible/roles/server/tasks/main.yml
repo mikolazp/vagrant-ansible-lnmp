@@ -17,6 +17,10 @@
   with_items: server.packages
   when: server.packages is defined
 
+- name: Install and configure ntp
+  shell: apt-get install ntp -y && service ntp stop && ntpdate pool.ntp.org && service ntp restart
+  become: yes
+
 - name: Configure the timezone
   become: yes
   template: src=timezone.tpl dest=/etc/timezone
@@ -28,7 +32,6 @@
 - name: Set default system language pack
   shell: locale-gen {{server.locale}}
   become: yes
-
 
 - name: Configure the locale
   become: yes
