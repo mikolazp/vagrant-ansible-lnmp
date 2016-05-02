@@ -25,12 +25,12 @@ end
 Vagrant.configure("2") do |config|
 
     config.vm.provider :virtualbox do |v|
-        v.name = "dev_main"
+        v.name = "dev"
         #v.gui = true
         v.customize [
             "modifyvm", :id,
-            "--name", "dev_main",
-            "--memory", 512,
+            "--name", "dev",
+            "--memory", 1024,
             "--natdnshostresolver1", "on",
             "--cpus", 1,
         ]
@@ -51,14 +51,18 @@ Vagrant.configure("2") do |config|
             #ansible.raw_arguments = ["-v"]
         end
     else
-        config.vm.provision :shell, path: "ansible/windows.sh", args: ["dev_main"]
+        config.vm.provision :shell, path: "ansible/windows.sh", args: ["dev"]
     end
     
     config.vm.provision "shell", run: "always" do |s|
 	s.path = "always.sh"
     end
 
+    config.vm.synced_folder "./data/mysql", "/var/lib/mysql", type: "nfs", id: "mysql"
+    config.vm.synced_folder "./conf/nginx/sites-enabled", "/etc/nginx/sites-enabled", type: "nfs"
+
     config.vm.synced_folder "./", "/vagrant", type: "nfs"
     config.vm.synced_folder "/Users/mykola/Code", "/home/vagrant/Code", type: "nfs"
+
 
 end
