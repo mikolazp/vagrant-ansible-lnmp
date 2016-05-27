@@ -2,7 +2,7 @@
 server:
     install: '1'
     packages: [git, mc, htop]
-    timezone: UTC
+    timezone: Europe/Vilnius
     locale: en_US.UTF-8
 vagrant_local:
     install: '1'
